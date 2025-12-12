@@ -1,0 +1,36 @@
+<div class="task-modal-bg" style="
+    position:fixed; top:0; left:0;
+    width:100%; height:100%;
+    background:rgba(0,0,0,0.55);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:999;
+">
+
+    <div class="task-modal p-4" style="
+        background:#2A2B33;
+        border-radius:18px;
+        width:350px;
+    ">
+
+        <div class="mood-header">
+            <h2>How are you feeling?</h2>
+            <span class="mood-close">✕</span>
+        </div>
+
+        <div class="mood-icons">
+            <span class="icon sad">😢</span>
+            <span class="icon neutral">😐</span>
+            <span class="icon happy">😊</span>
+        </div>
+
+        <div class="mood-slider-wrapper">
+            <input type="range" min="0" max="100" class="mood-slider" id="moodSlider">
+        </div>
+
+        <button id="resetBtn">Reset</button>
+
+    </div>
+
+</div>

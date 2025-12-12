@@ -1,0 +1,46 @@
+<!-- =========================================================
+     TASK CREATION FORM MODAL
+     This template is loaded dynamically via fetch() and
+     inserted into the DOM when the user clicks "Add Task".
+========================================================= -->
+
+<div class="task-modal-bg d-flex justify-content-center align-items-center">
+
+    <!-- Modal Box -->
+    <div class="task-modal p-4">
+
+        <!-- Header -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="text-white mb-0">Add a New Task</h5>
+
+            <!-- Close Modal -->
+            <span class="close-form text-white">&times;</span>
+        </div>
+
+        <!-- Task Creation Form -->
+        <form>
+
+            <!-- Task Name -->
+            <div class="mb-3">
+                <input id="taskName" type="text" class="form-control task-input" placeholder="Task name">
+            </div>
+
+            <!-- Task Description -->
+            <div class="mb-3">
+                <input id="taskDesc" type="text" class="form-control task-input" placeholder="Task description">
+            </div>
+
+            <!-- Due Date -->
+            <div class="mb-4">
+                <input id="taskDate" type="date" class="form-control task-input">
+            </div>
+
+            <!-- Submit -->
+            <button type="submit" class="btn create-task-btn w-100">
+                Create Task
+            </button>
+
+        </form>
+
+    </div>
+</div>

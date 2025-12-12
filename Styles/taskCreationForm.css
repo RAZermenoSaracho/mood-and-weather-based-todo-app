@@ -1,0 +1,109 @@
+/* =========================================================
+   TASK CREATION FORM - MODAL STYLING
+   This file controls the look of the "Add Task" popup form.
+========================================================= */
+
+/* Dark overlay background */
+.task-modal-bg {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* The modal box */
+.task-modal {
+    width: 350px;
+    background-color: #2A2B33;
+    border-radius: 18px;
+    padding: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    animation: modalFadeIn 0.2s ease-out;
+}
+
+/* Animation for showing modal */
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.94);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Close (X) button */
+.close-form {
+    font-size: 22px;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.15s ease;
+}
+
+.close-form:hover {
+    opacity: 1;
+}
+
+/* Input fields */
+.task-input {
+    background-color: #232530;
+    border: 1px solid #3a3d4a;
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.task-input::placeholder {
+    color: #a1a3ad;
+}
+
+.task-input:focus {
+    border-color: #baff00;
+    box-shadow: 0 0 0 0.15rem rgba(159, 255, 0, 0.25);
+    background-color: #232530;
+    color: white;
+}
+
+/* Create Task button */
+.create-task-btn {
+    background-color: #baff00;
+    color: #1b1d22;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 12px;
+    border-radius: 10px;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.create-task-btn:hover {
+    background-color: #d7ff45;
+    transform: translateY(-1px);
+}
+
+.create-task-btn:active {
+    transform: scale(0.98);
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .task-modal {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .task-input {
+        padding: 10px;
+    }
+
+    .create-task-btn {
+        padding: 10px;
+    }
+}

@@ -1,0 +1,128 @@
+/* Main card */
+.suggested-task-card {
+    background-color: #2f3341;
+    border-radius: 14px;
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    width: 100%;
+    color: white;
+    margin-bottom: 16px;
+}
+
+/* Title */
+.suggested-title {
+    color: #baff00;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+/* Description */
+.suggested-desc {
+    color: #c0c3cb;
+    font-size: 0.92rem;
+}
+
+/* Action Buttons Wrapper */
+.task-actions {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* Buttons General Style */
+.action-btn {
+    padding: 6px 14px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 8px;
+    border: none;
+    transition: 0.25s ease-in-out;
+}
+
+/* Individual Button Styles */
+.edit-btn {
+    background-color: #3f4352;
+    color: white;
+}
+
+.edit-btn:hover {
+    background-color: #525767;
+}
+
+.complete-btn {
+    background-color: #baff00;
+    color: #1a1c23;
+}
+
+.complete-btn:hover {
+    background-color: #d3ff33;
+}
+
+.delete-btn {
+    background-color: #ff4b4b;
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: #ff6b6b;
+}
+
+/* =========================================================
+   SUGGESTED TASK ADD BUTTON
+========================================================= */
+.suggested-add-btn {
+    background: none;
+    border: 2px solid #baff00;
+    color: #baff00;
+
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+
+    font-size: 22px;
+    font-weight: 600;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    /* CRITICAL FIX: remove font baseline AND align optically */
+    line-height: 1;
+    padding: 0;
+
+    /* THE MAGIC — shift glyph up for perfect centering */
+    transform: translateY(-1px);
+}
+
+/* Hover effect */
+.suggested-add-btn:hover {
+    background-color: #baff00;
+    color: #1b1d22;
+    transform: translateY(-1px) scale(1.1);
+}
+
+/* Click effect */
+.suggested-add-btn:active {
+    transform: translateY(-1px) scale(0.95);
+}
+
+/* =========================================================
+   Responsive
+========================================================= */
+@media (max-width: 480px) {
+    .suggested-task-card {
+        padding: 16px;
+    }
+
+    .task-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .action-btn {
+        width: 100%;
+        text-align: center;
+    }
+}

@@ -1,0 +1,166 @@
+/* =========================================================
+   TASK CARD COMPONENT STYLING
+   Applies to each .task-card-advanced task element
+========================================================= */
+
+/* Main card container */
+.task-card-advanced {
+    background-color: #2f3341;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 22px;
+    width: 100%;
+    color: white;
+    position: relative;
+    transition: 0.25s ease;
+}
+
+/* Hover effect */
+.task-card-advanced:hover {
+    border-color: rgba(186, 255, 0, 0.3);
+}
+
+/* Title */
+.task-title-adv {
+    color: #baff00;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+/* Description / duration text */
+.task-duration-adv {
+    color: #bdbdc6;
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+}
+
+/* Large icon at the top right */
+.task-main-icon i {
+    font-size: 34px;
+    color: #baff00;
+    opacity: 0.9;
+}
+
+/* Time or date section */
+.task-time-adv {
+    margin-top: 6px;
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.task-time-adv span {
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+/* Based-on section container */
+.based-on-wrapper {
+    margin-top: 10px;
+}
+
+/* Labels and info for "Based on ..." section */
+.based-on-label {
+    font-size: 0.85rem;
+    color: #9da1ad;
+    margin-bottom: 2px;
+}
+
+.based-on-info {
+    color: #baff00;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+/* Check icon for task completion */
+.task-check-adv i {
+    font-size: 26px;
+    color: #baff00;
+    cursor: pointer;
+    transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.task-check-adv i:hover {
+    transform: scale(1.1);
+}
+
+/* =========================================================
+   COMPLETED TASK STATE
+========================================================= */
+
+.task-completed {
+    opacity: 0.6;
+}
+
+.task-completed .task-title-adv {
+    text-decoration: line-through;
+}
+
+.task-completed .task-duration-adv {
+    text-decoration: line-through;
+}
+
+/* Filled check-circle is applied by JS (bi-check-circle-fill) */
+
+.task-completed .task-check-adv i {
+    opacity: 1;
+}
+
+/* =========================================================
+   DELETE BUTTON (Hidden until hover)
+========================================================= */
+
+.task-delete-btn {
+    background: none;
+    border: none;
+    outline: none;
+    color: #ff6b6b;
+    font-size: 20px;
+    cursor: pointer;
+
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+/* Show delete button only when card is hovered */
+.task-card-advanced:hover .task-delete-btn {
+    opacity: 1;
+}
+
+/* Delete button hover scale */
+.task-delete-btn:hover {
+    transform: scale(1.15);
+}
+
+/* =========================================================
+   RESPONSIVE ADJUSTMENTS
+========================================================= */
+
+@media (max-width: 480px) {
+    .task-card-advanced {
+        padding: 16px;
+    }
+
+    .task-time-adv {
+        font-size: 1.6rem;
+    }
+
+    .task-main-icon i {
+        font-size: 28px;
+    }
+
+    .based-on-wrapper {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+
+    .task-check-adv {
+        align-self: flex-end;
+    }
+}
+
+@media (max-width: 768px) {
+    .no-wrap-buttons {
+        display: none !important;
+    }
+}

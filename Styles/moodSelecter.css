@@ -1,0 +1,140 @@
+body {
+    background-color: #1e2431;
+}
+
+/* Modal Container */
+.mood-modal {
+    width: 480px;
+    background: #1e2431;
+    padding: 25px;
+    border-radius: 16px;
+    color: white;
+    margin: 50px auto;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    font-family: system-ui;
+}
+
+/* Header */
+.mood-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mood-header h2 {
+    font-size: 20px;
+    margin: 0;
+}
+
+.mood-close {
+    cursor: pointer;
+    font-size: 18px;
+    opacity: 0.7;
+}
+
+.mood-close:hover {
+    opacity: 1;
+}
+
+/* Icons Row */
+.mood-icons {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0 15px;
+    font-size: 30px;
+    opacity: 0.6;
+}
+
+.mood-icons .icon.active {
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+/* Slider wrapper */
+.mood-slider-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+/* Slider styling */
+.mood-slider {
+    -webkit-appearance: none;
+    width: 90%;
+    height: 6px;
+    border-radius: 5px;
+    background: #353c4a;
+    outline: none;
+    transition: 0.2s;
+}
+
+.mood-slider {
+    --value: 50%;
+}
+
+/* Track */
+.mood-slider::-webkit-slider-runnable-track {
+    height: 6px;
+    border-radius: 5px;
+    background: linear-gradient(to right,
+            #b0ff31 0%,
+            #b0ff31 var(--value),
+            #353c4a var(--value),
+            #353c4a 100%);
+}
+
+/* Thumb */
+.mood-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #1e2431;
+    border: 3px solid #b0ff31;
+    cursor: pointer;
+    margin-top: -6px;
+}
+
+/* For Firefox */
+.mood-slider::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #1e2431;
+    border: 3px solid #b0ff31;
+    cursor: pointer;
+}
+
+.mood-slider::-moz-range-track {
+    background: #353c4a;
+    height: 6px;
+    border-radius: 5px;
+}
+
+/* Reset Button */
+#resetBtn {
+    display: block;
+    margin: 25px auto;
+    padding: 10px 22px;
+    border-radius: 10px;
+    background: #1e2431;
+    color: #b0ff31;
+    border: 2px solid #b0ff31;
+    font-size: 16px;
+    font-family: system-ui;
+    cursor: pointer;
+    transition: 0.25s ease;
+    box-shadow: 0 0 8px rgba(176, 255, 49, 0.25);
+}
+
+#resetBtn:hover {
+    background: #b0ff31;
+    color: #1e2431;
+    box-shadow: 0 0 12px rgba(176, 255, 49, 0.6);
+    transform: translateY(-2px);
+}
+
+#resetBtn:active {
+    transform: scale(0.97);
+}

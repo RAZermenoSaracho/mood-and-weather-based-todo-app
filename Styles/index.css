@@ -1,0 +1,224 @@
+body {
+    background-color: #1D1E26;
+    color: white;
+    font-family: Inter, sans-serif;
+}
+
+/* ================= NAVBAR ================= */
+.app-navbar {
+    background: linear-gradient(180deg, #1f2028, #1a1b22);
+    border-radius: 18px;
+    margin: 16px;
+    padding: 14px 20px;
+}
+
+.navbar-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-left,
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.outer-circle {
+    width: 42px;
+    height: 42px;
+    border: 3px solid #baff00;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.circle {
+    width: 26px;
+    height: 26px;
+    background-color: #baff00;
+    border-radius: 50%;
+}
+
+.welcome {
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.guest-text {
+    font-size: 0.85rem;
+    color: #a0a0a0;
+}
+
+/* ================= MOOD BUTTON ================= */
+.mood-pill {
+    background-color: #2A2B33;
+    border: 1px solid #3A3B42;
+    border-radius: 20px;
+    padding: 6px 14px;
+    color: #baff00;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.mood-pill:hover {
+    background-color: #333544;
+}
+
+.mood-icon {
+    font-size: 1rem;
+}
+
+.icon-circle {
+    width: 40px;
+    height: 40px;
+    border: 2px solid #baff00;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ================= GRID ================= */
+.home-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 24px;
+}
+
+/* ================= READY HEADER ================= */
+.tasks-panel {
+    background-color: #2A2B33;
+    border-radius: 18px;
+    padding: 24px;
+}
+
+.tasks-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.panel-title {
+    color: #baff00;
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.panel-sub {
+    font-size: 0.9rem;
+    color: #c7c7ce;
+}
+
+/* ================= ACTIONS ================= */
+.actions-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.task-actions {
+    display: flex;
+    gap: 6px;
+    margin-top: 6px;
+    flex-wrap: nowrap;
+}
+
+/* Compact buttons */
+.add-task-btn-sm,
+.complete-btn-sm,
+.weather-filter-btn {
+    font-size: 0.72rem;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-weight: 600;
+    border: none;
+}
+
+.add-task-btn-sm {
+    background-color: #3a3d47;
+    color: white;
+}
+
+.complete-btn-sm,
+.weather-filter-btn {
+    background-color: #baff00;
+    color: #1a1c23;
+}
+
+/* ================= MOBILE ================= */
+.mobile-actions-toggle {
+    display: none;
+    background-color: #2A2B33;
+    border: 1px solid #3A3B42;
+    color: #baff00;
+    border-radius: 10px;
+    padding: 10px;
+    font-weight: 600;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+
+    .home-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tasks-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .mobile-actions-toggle {
+        display: block;
+        margin-top: 10px;
+    }
+
+    /* 🔥 IMPORTANT: override Bootstrap completely */
+    .task-actions {
+        display: none !important;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .task-actions.is-open {
+        display: flex !important;
+    }
+
+    .task-actions button {
+        width: 100%;
+    }
+}
+
+/* ================= NAVBAR MOBILE FIX ================= */
+@media (max-width: 768px) {
+
+    .app-navbar {
+        padding: 14px;
+    }
+
+    .navbar-inner {
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+        text-align: center;
+    }
+
+    .navbar-left,
+    .navbar-right {
+        justify-content: center;
+    }
+
+    .navbar-right {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+}
