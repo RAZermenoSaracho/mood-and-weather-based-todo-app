@@ -4,7 +4,7 @@ const { engine } = require("express-handlebars");
 require("dotenv").config();
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
-const User = require("./models/User");
+const User = require("../models/User");
 
 // ---------------------------------------------------------
 // DATABASE CONNECTION
@@ -79,7 +79,7 @@ app.set("views", path.join(rootPath, "views"));
 // ---------------------------------------------------------
 // MODELS
 // ---------------------------------------------------------
-const Task = require("./models/Task");
+const Task = require("../models/Task");
 
 // ---------------------------------------------------------
 // ROUTES
@@ -484,12 +484,17 @@ app.delete("/tasks/:id", requireAuth, async (req, res) => {
 // SERVER START
 // ---------------------------------------------------------
 
-if (require.main === module) {
+if (process.env.VERCEL) {
+    // Vercel serverless handler
+    module.exports = (req, res) => {
+        app(req, res);
+    };
+} else {
+    // Local development
     app.listen(PORT, () => {
-        console.log(`Server running on port ${PORT}`);
+        console.log(`🚀 Server running at http://localhost:${PORT}`);
     });
 }
 
-module.exports = app;
 
 

@@ -4,8 +4,8 @@
   "description": "Mood & Weather aware To-Do App",
   "type": "commonjs",
   "scripts": {
-    "dev": "nodemon server.js",
-    "start": "node server.js"
+    "dev": "nodemon api/index.js",
+    "start": "node api/index.js"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
