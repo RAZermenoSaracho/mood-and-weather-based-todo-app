@@ -39,7 +39,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Serve static assets
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(process.cwd(), "public")));
 
 const session = require("express-session");
 
@@ -48,7 +48,10 @@ app.use(
         secret: process.env.SESSION_SECRET || "dev_secret",
         resave: false,
         saveUninitialized: false,
-        cookie: { secure: false } // true en prod con https
+        cookie: {
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "lax"
+        }
     })
 );
 
