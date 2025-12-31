@@ -1,0 +1,12 @@
+{
+    "routes": [
+        {
+            "src": "/(Styles|Scripts|assets)/(.*)",
+            "dest": "/$1/$2"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "/api"
+        }
+    ]
+}
