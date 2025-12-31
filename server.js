@@ -484,14 +484,12 @@ app.delete("/tasks/:id", requireAuth, async (req, res) => {
 // SERVER START
 // ---------------------------------------------------------
 
-if (process.env.NODE_ENV !== "production") {
+if (require.main === module) {
     app.listen(PORT, () => {
         console.log(`Server running on port ${PORT}`);
     });
 }
 
-// Vercel serverless handler
-module.exports = (req, res) => {
-    app(req, res);
-};
+module.exports = app;
+
 
