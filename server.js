@@ -39,7 +39,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Serve static assets
-app.use(express.static(path.join(process.cwd(), "public")));
+app.use(express.static("public"));
 
 const session = require("express-session");
 
@@ -490,6 +490,8 @@ if (process.env.NODE_ENV !== "production") {
     });
 }
 
-// Export app for Vercel serverless
-module.exports = app;
+// Vercel serverless handler
+module.exports = (req, res) => {
+    app(req, res);
+};
 

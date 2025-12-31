@@ -66,3 +66,5 @@ coverage/
 ############################
 uploads/
 public/uploads/
+.vercel
+.env*.local
