@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Mood & Weather aware To-Do App",
   "type": "commonjs",
+  "main": "api/index.js",
   "scripts": {
     "dev": "nodemon api/index.js",
     "start": "node api/index.js"

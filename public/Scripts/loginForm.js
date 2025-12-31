@@ -14,7 +14,10 @@ let authMode = "login"; // "login" | "signup"
 // ---------------------------------------------------------
 export async function initUser() {
     try {
-        const res = await fetch("/auth/me");
+        const res = await fetch("/auth/me", {
+            credentials: "include"
+        });
+
         const user = res.ok ? await res.json() : null;
 
         if (user) {
@@ -115,12 +118,30 @@ if (loginForm) {
             const res = await fetch("/auth/login", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
+                credentials: "include",
                 body: JSON.stringify({ email, password })
             });
 
+
             if (res.ok) {
                 showTaskSuccess("Welcome back!");
-                window.location.reload();
+
+                // 🔑 Espera a que la sesión exista
+                const me = await fetch("/auth/me", {
+                    credentials: "include"
+                }).then(r => r.json());
+
+                if (me) {
+                    // rehidrata UI sin reload
+                    switchToEditView(me);
+                    const city = await initWeather(me.location || null);
+                    updateNavbar(me.name, city);
+                    closeLoginModal();
+                } else {
+                    // fallback seguro
+                    window.location.reload();
+                }
+
                 return;
             }
 
@@ -148,8 +169,10 @@ if (loginForm) {
             const res = await fetch("/auth/register", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
+                credentials: "include",
                 body: JSON.stringify({ name, email, password })
             });
+
 
             if (!res.ok) {
                 const err = await res.json();
@@ -193,6 +216,7 @@ if (editForm) {
         const res = await fetch("/auth/me", {
             method: "PATCH",
             headers: { "Content-Type": "application/json" },
+            credentials: "include",
             body: JSON.stringify(payload)
         });
 
@@ -219,7 +243,11 @@ const logoutBtn = document.getElementById("logoutBtn");
 
 if (logoutBtn) {
     logoutBtn.addEventListener("click", async () => {
-        await fetch("/auth/logout", { method: "POST" });
+        await fetch("/auth/logout", {
+            method: "POST",
+            credentials: "include"
+        });
+
         showTaskSuccess("Logged out");
         window.location.reload();
     });
