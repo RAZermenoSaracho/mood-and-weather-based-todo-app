@@ -1,0 +1,44 @@
+{{!-- =========================================================
+EDIT TASK MODAL (Handlebars Partial)
+Allows editing an existing task
+========================================================= --}}
+
+<div id="editTaskModal" class="task-modal-bg d-flex justify-content-center align-items-center d-none">
+
+    <div class="task-modal p-4">
+
+        <!-- Header -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="text-white mb-0">Edit Task</h5>
+            <span class="close-form text-white">&times;</span>
+        </div>
+
+        <!-- Edit Form -->
+        <form id="editTaskForm" data-id="">
+
+            <!-- Task Name -->
+            <div class="mb-3">
+                <input id="editTaskName" name="editTaskName" type="text" class="form-control task-input"
+                    placeholder="Task name" required>
+            </div>
+
+            <!-- Task Description -->
+            <div class="mb-3">
+                <input id="editTaskDesc" name="editTaskDesc" type="text" class="form-control task-input"
+                    placeholder="Task description">
+            </div>
+
+            <!-- Due Date -->
+            <div class="mb-4">
+                <input id="editTaskDate" name="editTaskDate" type="date" class="form-control task-input" required>
+            </div>
+
+            <!-- Submit -->
+            <button type="submit" class="btn create-task-btn w-100">
+                Save Changes
+            </button>
+
+        </form>
+
+    </div>
+</div>

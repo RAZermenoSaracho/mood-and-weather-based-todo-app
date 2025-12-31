@@ -1,12 +1,16 @@
-// =========================================================
-// SUGGESTED TASK SYSTEM — mood + weather (AND logic)
-// =========================================================
+/**
+ * SUGGESTED TASK SYSTEM
+ * - Generates task suggestions based on mood + weather
+ * - Avoids duplicates
+ * - Creates real tasks via backend API
+ * - Optimistic UI update (no page reload)
+ */
 
-import { renderTask } from "./taskComponent.js";
-import { updateTaskCount } from "./taskCreationForm.js";
 import { getCurrentWeatherCondition } from "./weather.js";
+import { showTaskSuccess, showTaskError } from "./toast.js";
+import { renderTaskCard } from "./taskComponent.js";
 
-// Panel for suggested tasks
+// Suggested tasks container
 const suggestedPanel = document.querySelector(".suggested-panel");
 
 // ---------------------------------------------------------
@@ -173,83 +177,108 @@ const suggestedTasksDB = [
     }
 ];
 
-
 // ---------------------------------------------------------
-// GET MOOD CATEGORY FROM COOKIE
+// GET MOOD FROM COOKIE
 // ---------------------------------------------------------
 function getMoodCategory() {
-    const cookies = document.cookie.split(";");
+    const moodCookie = document.cookie
+        .split(";")
+        .find(c => c.trim().startsWith("Mood="));
 
-    let moodValue = 50;
-    for (let c of cookies) {
-        c = c.trim();
-        if (c.startsWith("Mood=")) {
-            moodValue = parseInt(c.split("=")[1]);
-        }
-    }
+    const value = moodCookie ? parseInt(moodCookie.split("=")[1], 10) : 50;
 
-    if (moodValue <= 35) return "sad";
-    if (moodValue >= 75) return "happy";
+    if (value <= 35) return "sad";
+    if (value >= 75) return "happy";
     return "neutral";
 }
 
 // ---------------------------------------------------------
-// LOAD SUGGESTED TASKS (MOOD + WEATHER)
+// LOAD SUGGESTED TASKS
 // ---------------------------------------------------------
 export function loadSuggestedTasks() {
-    // Remove previous cards
-    const existing = suggestedPanel.querySelectorAll(".suggested-task-card");
-    existing.forEach(card => card.remove());
+    if (!suggestedPanel) return;
+
+    // Clear existing suggestions
+    suggestedPanel.querySelectorAll(".suggested-task-card").forEach(el => el.remove());
 
     const mood = getMoodCategory();
     const weather = getCurrentWeatherCondition();
 
+    // Existing task names already rendered
+    const existingTasks = Array.from(
+        document.querySelectorAll(".task-title-adv")
+    ).map(el => el.textContent.toLowerCase());
+
     const filtered = suggestedTasksDB.filter(task =>
         task.moods.includes(mood) &&
-        task.weathers.includes(weather)
+        task.weathers.includes(weather) &&
+        !existingTasks.includes(task.name.toLowerCase())
     );
 
-    filtered.forEach(task => createSuggestedTaskCard(task, weather));
+    filtered.slice(0, 5).forEach(task => renderSuggestedCard(task, weather));
 }
 
 // ---------------------------------------------------------
-// CREATE EACH SUGGESTED CARD
+// RENDER SUGGESTED TASK CARD
 // ---------------------------------------------------------
-function createSuggestedTaskCard(task, weather) {
-    fetch("./Components/suggestedTaskComponent.html")
-        .then(res => res.text())
-        .then(html => {
-            const wrapper = document.createElement("div");
-            wrapper.innerHTML = html.trim();
-            const card = wrapper.firstElementChild;
+function renderSuggestedCard(task, weather) {
+    const card = document.createElement("div");
+    card.className = "suggested-task-card shadow-sm";
 
-            card.querySelector(".suggested-title").innerText = task.name;
-            card.querySelector(".suggested-reason").innerText = task.reason;
+    card.innerHTML = `
+        <div>
+            <h6 class="suggested-title">${task.name}</h6>
+            <p class="suggested-reason">${task.desc}</p>
+        </div>
+        <button class="suggested-add-btn" type="button">+</button>
+    `;
 
-            card.querySelector(".suggested-add-btn")
-                .addEventListener("click", () => addSuggestedTask(task, weather));
+    card.querySelector(".suggested-add-btn").addEventListener("click", () =>
+        addSuggestedTask(task, weather, card)
+    );
 
-            suggestedPanel.appendChild(card);
+    suggestedPanel.appendChild(card);
+}
+
+// ---------------------------------------------------------
+// ADD SUGGESTED TASK (BACKEND + OPTIMISTIC UI)
+// ---------------------------------------------------------
+async function addSuggestedTask(task, weather, card) {
+    try {
+        const res = await fetch("/tasks", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                name: task.name,
+                desc: task.desc,
+                date: new Date().toISOString().slice(0, 10),
+                weather
+            })
         });
-}
 
-// ---------------------------------------------------------
-// ADD TASK FROM SUGGESTIONS (WITH WEATHER)
-// ---------------------------------------------------------
-function addSuggestedTask(task, weather) {
-    const newTask = {
-        id: crypto.randomUUID(),
-        name: task.name,
-        desc: task.desc,
-        date: new Date().toISOString().slice(0, 10),
-        completed: false,
-        weather // 🔥 IMPORTANT: preserve weather
-    };
+        if (res.status === 401) {
+            showTaskError("Please log in to add tasks");
+            document.getElementById("loginModal")?.classList.remove("d-none");
+            return;
+        }
 
-    const stored = JSON.parse(localStorage.getItem("tasks") || "[]");
-    stored.push(newTask);
-    localStorage.setItem("tasks", JSON.stringify(stored));
+        if (!res.ok) throw new Error("Failed to create task");
 
-    renderTask(newTask);
-    updateTaskCount();
+        const createdTask = await res.json();
+
+        // Remove suggestion instantly
+        card.remove();
+
+        // Render new task with correct weather icon
+        renderTaskCard(createdTask);
+
+        showTaskSuccess("Task added!");
+
+        // 🔔 Notify app that tasks changed
+        document.dispatchEvent(new CustomEvent("tasks:updated"));
+
+    } catch (err) {
+        console.error(err);
+        showTaskError("Could not add suggested task");
+    }
 }

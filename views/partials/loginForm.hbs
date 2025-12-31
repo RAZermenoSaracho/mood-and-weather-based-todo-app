@@ -1,0 +1,100 @@
+{{!-- =========================================================
+LOGIN / EDIT PROFILE MODAL (Handlebars Partial)
+========================================================= --}}
+
+<div id="loginModal" class="login-modal-container d-flex justify-content-center align-items-center d-none">
+
+    <div class="login-modal shadow-lg">
+        <!-- Header -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="text-white mb-0 modal-title">Login</h5>
+            <span class="close-icon text-white">&times;</span>
+        </div>
+
+        <!-- LOGIN VIEW -->
+        <div class="login-view">
+            <h3 class="welcome-title text-center">Welcome Back!</h3>
+            <p class="subtitle text-center">Please enter your details to login</p>
+
+            <form id="loginForm">
+                <div class="mb-3">
+                    <input id="loginName" name="loginName" type="text" class="form-control custom-input"
+                        placeholder="Name">
+                    <small class="error-msg text-warning d-none" id="loginNameError">
+                        Name is required.
+                    </small>
+                </div>
+
+                <div class="mb-3">
+                    <input id="loginEmail" name="loginEmail" type="email" class="form-control custom-input"
+                        placeholder="Email" required>
+                    <small class="error-msg text-warning d-none" id="loginEmailError">
+                        Invalid email.
+                    </small>
+                </div>
+
+                <div class="mb-4">
+                    <input id="loginPassword" name="loginPassword" type="password" class="form-control custom-input"
+                        placeholder="Password" required>
+                    <small class="error-msg text-warning d-none" id="loginPasswordError">
+                        Password must be at least 8 characters.
+                    </small>
+                </div>
+
+                <button type="submit" class="btn login-btn w-100" id="loginSubmitBtn">
+                    Login
+                </button>
+            </form>
+        </div>
+
+        <!-- EDIT PROFILE VIEW -->
+        <div class="edit-view d-none">
+            <h3 class="welcome-title text-center">Edit Profile</h3>
+            <p class="subtitle text-center">Update your details or log out</p>
+
+            <form id="editProfileForm">
+
+                <div class="mb-3">
+                    <input id="editName" name="editName" type="text" class="form-control custom-input"
+                        placeholder="Name" required>
+                    <small class="error-msg text-warning d-none" id="editNameError">
+                        Name is required.
+                    </small>
+                </div>
+
+                <div class="mb-3">
+                    <input id="editEmail" name="editEmail" type="email" class="form-control custom-input"
+                        placeholder="Email">
+                    <small class="error-msg text-warning d-none" id="editEmailError">
+                        Invalid email.
+                    </small>
+                </div>
+
+                <div class="mb-3">
+                    <input id="editPassword" name="editPassword" type="password" class="form-control custom-input"
+                        placeholder="New password (min 8 chars)">
+                    <small class="error-msg text-warning d-none" id="editPasswordError">
+                        Password must be at least 8 characters.
+                    </small>
+                </div>
+
+                <!-- Location -->
+                <div class="mb-4">
+                    <input id="editLocation" name="editLocation" type="text" class="form-control custom-input"
+                        placeholder="Location (City)">
+                </div>
+
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn login-btn w-100" id="saveProfileBtn">
+                        Save Changes
+                    </button>
+
+                    <button type="button" class="btn btn-outline-light w-50" id="logoutBtn">
+                        Logout
+                    </button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>

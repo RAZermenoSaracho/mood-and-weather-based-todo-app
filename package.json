@@ -1,0 +1,21 @@
+{
+  "name": "mood-based-todo-app",
+  "version": "1.0.0",
+  "description": "A modern **Mood & Weather-aware To-Do application** built with **vanilla JavaScript**, designed to adapt task suggestions based on the user’s **mood** and **current weather conditions**.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "express-handlebars": "^8.0.4",
+    "express-session": "^1.18.2",
+    "mongoose": "^9.0.2"
+  }
+}

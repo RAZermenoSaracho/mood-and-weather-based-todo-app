@@ -1,0 +1,116 @@
+<!-- NAVBAR -->
+<nav class="app-navbar">
+    <div class="navbar-inner">
+        <div class="navbar-left">
+            <div class="outer-circle">
+                <div class="circle"></div>
+            </div>
+            <div>
+                <div class="welcome">Welcome</div>
+                <div class="guest-text">Guest.</div>
+            </div>
+        </div>
+
+        <div class="navbar-right">
+            <button id="moodSelecter" class="mood-pill">
+                Mood: <span class="mood-icon">🙂</span>
+            </button>
+
+            <div class="icon-circle">
+                <i class="bi bi-cloud-sun"></i>
+            </div>
+            <div class="icon-circle" id="profileBtn">
+                <i class="bi bi-person"></i>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- MAIN -->
+<div class="container-fluid home-grid px-4 pb-5">
+
+    <div class="tasks-panel">
+
+        <!-- HEADER -->
+        <div class="tasks-header">
+            <div>
+                <h2 class="panel-title">Ready for Today?</h2>
+                <p class="panel-sub" id="taskCounter">
+                    You have 0 tasks planned for today
+                </p>
+            </div>
+
+            <div class="actions-wrapper">
+
+                <!-- MOBILE TOGGLE -->
+                <button id="mobileActionsToggle" class="mobile-actions-toggle">
+                    Filters & Actions
+                </button>
+
+                <!-- ACTIONS -->
+                <div class="task-actions">
+
+                    <button class="add-task-btn-sm" id="addTask">
+                        <i class="bi bi-plus"></i> Add
+                    </button>
+
+                    <button class="complete-btn-sm" id="completeAllBtn">
+                        Complete All
+                    </button>
+
+                    <button class="complete-btn-sm" id="toggleCompletedBtn">
+                        Completed
+                    </button>
+
+                    {{!-- <button class="weather-filter-btn" data-weather="all">All</button> --}}
+                    <button class="weather-filter-btn" data-weather="sunny">
+                        <i class="bi bi-brightness-high"></i>
+                    </button>
+                    <button class="weather-filter-btn" data-weather="cloudy">
+                        <i class="bi bi-cloud"></i>
+                    </button>
+                    <button class="weather-filter-btn" data-weather="rainy">
+                        <i class="bi bi-cloud-rain"></i>
+                    </button>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- BACKLOG TASKS -->
+        <div class="row g-3 mt-3" id="taskGrd">
+            {{#each tasks}}
+            {{#unless completed}}
+            {{> taskCard}}
+            {{/unless}}
+            {{/each}}
+        </div>
+
+        <!-- COMPLETED TASKS SECTION -->
+        <section id="completedSection" class="completed-section d-none mt-4">
+            {{!-- <h3 class="panel-title mb-3">Completed Tasks</h3> --}}
+
+            <div class="row g-3" id="completedTaskGrd">
+                {{#each tasks}}
+                {{#if completed}}
+                {{> taskCard}}
+                {{/if}}
+                {{/each}}
+            </div>
+        </section>
+
+    </div>
+
+    <!-- SUGGESTED TASKS -->
+    <div class="suggested-panel">
+        <h3 class="suggested-title mb-3">Suggested tasks</h3>
+    </div>
+
+</div>
+
+<!-- TASK CREATION MODAL -->
+{{> taskCreationForm}}
+<!-- TASK EDIT MODAL -->
+{{> editTaskForm}}
+<!-- LOGIN / PROFILE MODAL -->
+{{> loginForm}}

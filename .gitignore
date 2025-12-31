@@ -1,0 +1,68 @@
+############################
+# ENVIRONMENT
+############################
+.env
+.env.local
+.env.*.local
+
+############################
+# DEPENDENCIES
+############################
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+############################
+# OS / SYSTEM
+############################
+.DS_Store
+Thumbs.db
+
+############################
+# EDITORS / IDEs
+############################
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+
+############################
+# BUILD / CACHE
+############################
+dist/
+build/
+.cache/
+.next/
+out/
+.vercel/
+
+############################
+# DATABASE / MONGO
+############################
+data/
+dump/
+*.mongodb
+*.bson
+
+############################
+# SESSIONS / TEMP
+############################
+*.session
+*.tmp
+*.pid
+*.seed
+
+############################
+# COVERAGE / TESTING
+############################
+coverage/
+.nyc_output/
+
+############################
+# UPLOADS / GENERATED FILES
+############################
+uploads/
+public/uploads/

@@ -153,6 +153,54 @@ body {
     color: #1a1c23;
 }
 
+/* ----------------------------------
+   DEFAULT (INACTIVE STATE)
+---------------------------------- */
+.weather-filter-btn,
+.complete-btn-sm {
+    background-color: #000;
+    /* black */
+    color: #fff;
+    border: 1px solid #000;
+    transition: all 0.2s ease;
+}
+
+/* ----------------------------------
+   ACTIVE STATE (GREEN)
+---------------------------------- */
+.weather-filter-btn.active,
+.complete-btn-sm.active {
+    background-color: #baff00;
+    /* green */
+    color: #000;
+    border-color: #baff00;
+}
+
+/* Optional: hover polish */
+.weather-filter-btn:hover,
+.complete-btn-sm:hover {
+    opacity: 0.85;
+}
+
+/* Complete All is ALWAYS active-looking */
+#completeAllBtn {
+    background-color: #baff00;
+    /* green */
+    color: #000;
+    border: 1px solid #baff00;
+}
+
+/* It never toggles */
+#completeAllBtn.active {
+    background-color: #baff00;
+}
+
+.toast-error {
+    background-color: #ef4444;
+    color: white;
+}
+
+
 /* ================= MOBILE ================= */
 .mobile-actions-toggle {
     display: none;

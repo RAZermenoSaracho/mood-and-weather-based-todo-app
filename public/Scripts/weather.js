@@ -24,38 +24,38 @@ document.addEventListener("DOMContentLoaded", () => {
 // ---------------------------------------------------------
 // MAIN ENTRY POINT
 // ---------------------------------------------------------
-export async function initWeather(location) {
+export async function initWeather(savedLocation = null) {
     try {
-        let locationName = location || null;
+        let locationName = savedLocation;
         let coords = null;
 
-        // 1) If user defined a city manually → forward geocoding
+        // 1️⃣ User-defined location (highest priority)
         if (locationName) {
-            coords = await getCoordinates(locationName);
+            console.log(locationName)
+            coords = await getCoordinates(locationName).then(console.log("Coordinates found:", coords));
+
+            // If user location exists but cannot be resolved,
+            // still KEEP the name and do NOT fallback to GPS
+            if (!coords) {
+                console.warn("Could not resolve user location, keeping name:", locationName);
+            }
         }
 
-        // 2) If no coords yet → try browser GPS
-        if (!coords) {
+        // 2️⃣ Browser GPS (only if NO user location)
+        if (!coords && !locationName) {
             coords = await getDeviceCoords();
-
-            // If GPS worked → resolve city from coordinates
             if (coords) {
                 locationName = await getCityFromCoords(coords.lat, coords.lon);
             }
         }
 
-        // 3) Final fallback → Mexico City
-        if (!coords) {
+        // 3️⃣ Final fallback → ONLY if no user location and no GPS
+        if (!coords && !savedLocation) {
             locationName = "Mexico City";
             coords = await getCoordinates(locationName);
         }
 
-        if (!coords) {
-            console.warn("Could not resolve coordinates at all.");
-            return locationName || "Mexico City";
-        }
 
-        // 4) Fetch weather
         const condition = await getWeather(coords.lat, coords.lon);
 
         updateWeatherIcon(condition);
@@ -63,12 +63,11 @@ export async function initWeather(location) {
         loadSuggestedTasks();
 
         console.log("Weather loaded for:", locationName, "→", condition);
-
-        return locationName || "Mexico City";
+        return locationName;
 
     } catch (err) {
         console.error("Weather error:", err);
-        return location || "Mexico City";
+        return savedLocation || "Mexico City";
     }
 }
 
@@ -138,19 +137,16 @@ function getDeviceCoords() {
 }
 
 // ---------------------------------------------------------
-// WEATHER CONDITION (Open-Meteo)
+// GET WEATHER CONDITION (via Express backend proxy)
+// The weather data is fetched through a backend proxy endpoint.
+// The browser only calls /api/weather; the 304 responses are due to HTTP caching.
 // ---------------------------------------------------------
 async function getWeather(lat, lon) {
-    const res = await fetch(
-        `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`
-    );
+    const response = await fetch(`/api/weather?lat=${lat}&lon=${lon}`);
+    const data = await response.json();
 
-    const data = await res.json();
-    const code = data?.current_weather?.weathercode ?? 0;
-
-    if ([51, 53, 55, 61, 63, 65, 80, 81, 82].includes(code)) return "rainy";
-    if ([2, 3].includes(code)) return "cloudy";
-    return "sunny";
+    // Backend already normalizes the condition
+    return data.condition || "sunny";
 }
 
 // ---------------------------------------------------------

@@ -1,0 +1,55 @@
+{{!-- =========================================================
+TASK CARD PARTIAL (Handlebars)
+Renders a single task using server-side data
+========================================================= --}}
+
+<div class="task-card-advanced shadow-sm {{#if completed}}task-completed{{/if}}" data-id="{{_id}}"
+    data-weather="{{weather}}">
+
+    <!-- Top row: Title + description + main icon -->
+    <div class="d-flex justify-content-between align-items-start">
+        <div>
+            <!-- Task Title -->
+            <h6 class="task-title-adv">{{name}}</h6>
+
+            <!-- Task Description -->
+            <p class="task-duration-adv">{{desc}}</p>
+        </div>
+
+        <!-- Main icon (weather-based) -->
+        <div class="task-main-icon">
+            {{#ifEquals weather "rainy"}}
+            <i class="bi bi-cloud-rain"></i>
+            {{else ifEquals weather "cloudy"}}
+            <i class="bi bi-cloud"></i>
+            {{else}}
+            <i class="bi bi-brightness-high"></i>
+            {{/ifEquals}}
+        </div>
+    </div>
+
+    <!-- Due Date -->
+    <h3 class="task-time-adv">
+        {{date}}
+    </h3>
+
+    <!-- Bottom row: completion toggle + delete -->
+    <div class="based-on-wrapper d-flex justify-content-between align-items-center mt-3">
+
+        <!-- Completion Check Icon -->
+        <div class="task-check-adv">
+            {{#if completed}}
+            <i class="bi bi-check-circle-fill"></i>
+            {{else}}
+            <i class="bi bi-check-circle"></i>
+            {{/if}}
+        </div>
+
+        <!-- Delete Button -->
+        <button class="task-delete-btn">
+            <i class="bi bi-trash"></i>
+        </button>
+
+    </div>
+
+</div>

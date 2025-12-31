@@ -1,10 +1,9 @@
-<!-- =========================================================
-     TASK CREATION FORM MODAL
-     This template is loaded dynamically via fetch() and
-     inserted into the DOM when the user clicks "Add Task".
-========================================================= -->
+{{!-- =========================================================
+TASK CREATION FORM MODAL (Handlebars Partial)
+Rendered server-side and toggled via JavaScript
+========================================================= --}}
 
-<div class="task-modal-bg d-flex justify-content-center align-items-center">
+<div id="taskCreationModal" class="task-modal-bg d-flex justify-content-center align-items-center d-none">
 
     <!-- Modal Box -->
     <div class="task-modal p-4">
@@ -18,21 +17,23 @@
         </div>
 
         <!-- Task Creation Form -->
-        <form>
+        <form id="createTaskForm">
 
             <!-- Task Name -->
             <div class="mb-3">
-                <input id="taskName" type="text" class="form-control task-input" placeholder="Task name">
+                <input id="taskName" name="taskName" type="text" class="form-control task-input" placeholder="Task name"
+                    required>
             </div>
 
             <!-- Task Description -->
             <div class="mb-3">
-                <input id="taskDesc" type="text" class="form-control task-input" placeholder="Task description">
+                <input id="taskDesc" name="taskDesc" type="text" class="form-control task-input"
+                    placeholder="Task description">
             </div>
 
             <!-- Due Date -->
             <div class="mb-4">
-                <input id="taskDate" type="date" class="form-control task-input">
+                <input id="taskDate" name="taskDate" type="date" class="form-control task-input" required>
             </div>
 
             <!-- Submit -->

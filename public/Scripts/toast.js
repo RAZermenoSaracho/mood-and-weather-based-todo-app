@@ -15,3 +15,13 @@ export function showTaskSuccess(message) {
         setTimeout(() => toast.remove(), 300);
     }, 2500);
 }
+
+export function showTaskError(message) {
+    const toast = document.createElement("div");
+    toast.className = "toast toast-error";
+    toast.textContent = message;
+
+    document.body.appendChild(toast);
+
+    setTimeout(() => toast.remove(), 3000);
+}
